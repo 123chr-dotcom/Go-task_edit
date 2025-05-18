@@ -31,8 +31,8 @@ func main() {
 	
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	
-	fmt.Println("任务管理服务启动在 :8080")
-	http.ListenAndServe(":8080", nil)
+	fmt.Println("任务管理服务启动在 :1145")
+	http.ListenAndServe(":1145", nil)
 }
 
 func loadTasks() {
