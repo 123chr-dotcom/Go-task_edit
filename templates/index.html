@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>任务管理</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .task-list {
+            margin: 20px 0;
+        }
+        .task {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        .task-content {
+            flex-grow: 1;
+            margin: 0 10px;
+        }
+        .task.done .task-content {
+            text-decoration: line-through;
+            color: #888;
+        }
+        .add-task {
+            display: flex;
+            margin-top: 20px;
+        }
+        .add-task input {
+            flex-grow: 1;
+            padding: 8px;
+        }
+        .add-task button {
+            padding: 8px 15px;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>任务管理</h1>
+    
+    <div class="task-list">
+        {{range .}}
+        <div class="task {{if .Done}}done{{end}}">
+            <form action="/toggle" method="post" style="display:inline">
+                <input type="hidden" name="id" value="{{.ID}}">
+                <button type="submit">{{if .Done}}✓{{else}}○{{end}}</button>
+            </form>
+            <div class="task-content">{{.Content}}</div>
+        </div>
+        {{end}}
+    </div>
+    
+    <form class="add-task" action="/add" method="post">
+        <input type="text" name="content" placeholder="添加新任务..." required>
+        <button type="submit">添加</button>
+    </form>
+</body>
+</html>
